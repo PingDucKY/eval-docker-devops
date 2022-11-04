@@ -1,0 +1,27 @@
+version: "1.0"
+services:
+
+  mysql:
+    container_name: tp-eva-sql-cont
+    environment:
+      - MYSQL_ROOT_PASSWORD=Not24get
+    networks:
+      - tp-eva-network
+    image: "mysql:5.7"
+    volumes:
+      - "./php-apache-mysqli:/var/lib/mysql"
+
+  php-apache-mysqli:
+    depends_on: 
+      - mysql
+    container_name: tp-eva-php_apache_mysqli-cont
+    networks:
+    - tp-eva-network
+    ports: 
+      - "80:80"
+    image: damienpm/php-apache-mysqli
+    volumes:
+      - "./db-data:/var/www/html"
+    
+networks:
+  tp-eva-network:
