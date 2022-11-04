@@ -6,8 +6,6 @@ $password = "Not24get";
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	if ((strlen($_POST['prenom']) > 0) && (strlen($_POST['nom']) > 0)) {
-		// echo "L'utilisateur " . $_POST['prenom'] . " " . $_POST['nom'] . " à été ajouté à la base !";
 		// Create connection
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		// Check connection
@@ -18,13 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$sql = "INSERT INTO liste (note) VALUES ('" . $_POST['note'] . "')";
 
 		if ($conn->query($sql) === TRUE) {
-			echo "Une note à été ajouté à la liste de course";
+			echo "";
 		} else {
 			echo "Erreur: " . $sql . "<br>" . $conn->error;
 		}
 
 		$conn->close();
-	}
 }
 
 // Create connection
@@ -37,11 +34,11 @@ if ($conn->connect_error) {
 $sql = "SELECT note FROM liste";
 $result = $conn->query($sql);
 
-echo "Liste des courses :<br><br>";
+echo "<h1>Liste des courses :</h1><br><br>";
 if ($result->num_rows > 0) {
 	// output data of each row
 	while ($row = $result->fetch_assoc()) {
-		echo $row["note"]. "<br>";
+		echo "- ". $row["note"]. "<br>";
 	}
 } else {
 	echo "0 results";
