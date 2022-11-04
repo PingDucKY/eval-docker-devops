@@ -9,7 +9,7 @@ services:
       - tp-eva-network
     image: "mysql:5.7"
     volumes:
-      - "./php-apache-mysqli:/var/lib/mysql"
+      - "./db-data:/var/lib/mysql"
 
   php-apache-mysqli:
     depends_on: 
@@ -21,7 +21,7 @@ services:
       - "80:80"
     image: damienpm/php-apache-mysqli
     volumes:
-      - "./db-data:/var/www/html"
+      - "./php-apache-mysqli:/var/www/html"
     
 networks:
   tp-eva-network:
